@@ -1,7 +1,7 @@
 {
-  "name": "Covid-Vaccination",
+  "name": "Exam-Portal",
   "version": "0.1.0",
-  "description": "Covid-Vaccination",
+  "description": "Exam-Portal",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
