@@ -1,111 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 import Quiz from "./Quiz";
-const _ = require("lodash");
+import _ from "lodash";
 
-class DashBoard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: this.props.name,
-      board: [],
-      boardItem: "",
-      toggle: false,
-      submit: true,
-      logout: false,
-      loggedInUserObj: {},
-    };
-  }
+const DashBoard = (props) => {
+  const [setToggle] = useState(false);
+  const [submit, setSubmit] = useState(true);
+  const [logout, setLogout] = useState(false);
+  const [loggedInUserObj, setLoggedInUserObj] = useState({});
 
-  onLogoutYes = () => {
-    this.setState({ submit: false });
-    this.setState({ toggle: true });
+  useEffect(() => {
+    const loggedInUserName = _.get(props.location, "state.userName", {});
+    setLoggedInUserObj(JSON.parse(localStorage.getItem(loggedInUserName)));
+  }, [props.location]);
+
+  const onLogoutYes = () => {
+    setSubmit(false);
+    setToggle(true);
     const userObj = JSON.parse(
-      localStorage.getItem(_.get(this.state.loggedInUserObj, "userName", ""))
+      localStorage.getItem(_.get(loggedInUserObj, "userName", ""))
     );
     userObj.isUserLoggedIn = false;
     localStorage.setItem(
-      _.get(this.state.loggedInUserObj, "userName", ""),
+      _.get(loggedInUserObj, "userName", ""),
       JSON.stringify(userObj)
     );
   };
 
-  onLogout = () => {
-    this.setState({
-      logout: !this.state.logout,
-    });
+  const onLogout = () => {
+    setLogout(!logout);
   };
 
-  componentDidMount() {
-    const loggedInUserName = _.get(this.props.location, "state.userName", {});
-    this.setState({
-      loggedInUserObj: JSON.parse(localStorage.getItem(loggedInUserName)),
-    });
-  }
+  const localUname = `${_.get(loggedInUserObj, "firstName", "")} ${_.get(
+    loggedInUserObj,
+    "lastName",
+    ""
+  )}`;
 
-  render() {
-    const localUname = `${_.get(
-      this.state.loggedInUserObj,
-      "firstName",
-      ""
-    )} ${_.get(this.state.loggedInUserObj, "lastName", "")}`;
-
-    return (
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-          <div className="container">
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav ml-auto">
-                <li
-                  className="nav-item active text-right"
-                  onClick={this.onLogout}
-                >
-                  <button
-                    type="button"
-                    className="btn btn-danger mx-5"
-                    onClick={this.onLogout}
-                  >
-                    LOGOUT
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-success mx-5"
-                    onClick={this.onLogout}
-                  >
-                    SUBMIT
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        <div className="container">
-          <h4 className="mb-0 my-2 mx-3">Student Name : {localUname} </h4>
-          <h4 className="mb-0 my-2 mx-3">Subject Name : Programming</h4>
+  return (
+    <div>
+      <nav className="navbar bg-dark">
+        <div className="container-fluid">
+          <button
+            type="button"
+            className="btn btn-danger mx-5"
+            onClick={onLogout}
+          >
+            LOGOUT
+          </button>
+          <button
+            type="button"
+            className="btn btn-success mx-5"
+            onClick={onLogout}
+          >
+            SUBMIT
+          </button>
         </div>
-        <div className="container my-5">
-          <Quiz />
-        </div>
-        {!this.state.submit ? <Redirect to={`/`} /> : null}
-        {this.state.logout ? (
-          <SweetAlert
-            warning
-            showCancel
-            confirmBtnText="Yes"
-            confirmBtnBsStyle="danger"
-            title="Are you sure?"
-            onConfirm={this.onLogoutYes}
-            onCancel={this.onLogout}
-            focusCancelBtn
-          ></SweetAlert>
-        ) : (
-          ""
-        )}
+      </nav>
+
+      <div className="text-center">
+        <h4 className="mb-0 my-2 mx-3">Student Name : {localUname} </h4>
+        <h4 className="mb-0 my-2 mx-3">Subject Name : Programming</h4>
       </div>
-    );
-  }
-}
+      <div className="container my-5">
+        <Quiz />
+      </div>
+      {!submit ? <Redirect to={`/`} /> : null}
+      {logout ? (
+        <SweetAlert
+          warning
+          showCancel
+          confirmBtnText="Yes"
+          confirmBtnBsStyle="danger"
+          title="Are you sure?"
+          onConfirm={onLogoutYes}
+          onCancel={onLogout}
+          focusCancelBtn
+        ></SweetAlert>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
 
 export default DashBoard;

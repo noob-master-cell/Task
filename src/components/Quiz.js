@@ -3,7 +3,7 @@ import { QuizData } from "../Data/QuizData";
 import QuizResult from "./QuizResult";
 import "../quiz.css";
 
-function Quiz() {
+const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [clickedOption, setClickedOption] = useState(0);
@@ -31,13 +31,13 @@ function Quiz() {
   };
   return (
     <div>
-      <blockquote class="blockquote text-center">
+      <blockquote className="blockquote text-center">
         <p className="mb-0">Multiple Choice Questions</p>
         <footer>
           <cite title="Source Title">Start your QUIZ</cite>
         </footer>
       </blockquote>
-      <div className="containerr">
+      <div className="container">
         {showResult ? (
           <QuizResult
             score={score}
@@ -78,6 +78,5 @@ function Quiz() {
       </div>
     </div>
   );
-}
-
+};
 export default Quiz;

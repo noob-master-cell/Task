@@ -1,6 +1,6 @@
 import React from "react";
 
-function Result(props) {
+const Result = (props) => {
   return (
     <>
       <div className="show-score">
@@ -13,6 +13,6 @@ function Result(props) {
       </button>
     </>
   );
-}
+};
 
 export default Result;

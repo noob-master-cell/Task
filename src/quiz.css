@@ -1,25 +1,11 @@
-body {
-  display: flex;
-  margin: 0.5%;
+.body {
+  align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  height: 100%;
-  width: 100%;
+  align-self: center;
+  align-content: center;
+  background-color: red;
 }
 
-.containerr {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  min-height: 400px;
-  width: 400px;
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 2px 2px 10px 1px #000000;
-  overflow: hidden;
-  padding: 10px;
-  position: relative;
-}
 .heading-txt {
   color: white;
   font-size: 30px;
@@ -43,7 +29,7 @@ body {
   align-items: center;
 }
 #question-number {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 .option-container {
   display: flex;
@@ -78,7 +64,7 @@ body {
   padding: 10px;
   border: none;
   background-color: rgb(0, 60, 128);
-  background-color: #276272;
+  background-color: #2e6d7e;
   color: white;
   border-radius: 5px;
   box-shadow: 3px 3px 2px 1px rgb(127, 109, 109);

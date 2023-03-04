@@ -100,7 +100,7 @@ const Register = () => {
                       </div>
                       <div className="form-group">
                         <label className="font-weight-bold">
-                          Las Name <span className="text-danger">*</span>
+                          Last Name <span className="text-danger">*</span>
                           <span className="errorMsg">
                             {props.errors.lastName &&
                               props.touched.lastName &&
