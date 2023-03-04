@@ -63,7 +63,7 @@ const DashBoard = (props) => {
         </div>
       </nav>
 
-      <div className="container">
+      <div className="text-center">
         <h4 className="mb-0 my-2 mx-3">Student Name : {localUname} </h4>
         <h4 className="mb-0 my-2 mx-3">Subject Name : Programming</h4>
       </div>
