@@ -8,9 +8,11 @@ const Result = (props) => {
         <br />
         Total Score:{props.totalScore}
       </div>
-      <button id="next-button" onClick={props.tryAgain}>
-        Try Again
-      </button>
+      <div className="btn-position">
+        <button id="next-button" onClick={props.tryAgain}>
+          Try Again
+        </button>
+      </div>
     </>
   );
 };

@@ -1,19 +1,18 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 import Quiz from "./Quiz";
-import _ from "lodash";
+const _ = require("lodash");
 
 const DashBoard = (props) => {
-  const [setToggle] = useState(false);
+  const [username, setUsername] = useState(props.name);
+  const [board, setBoard] = useState([]);
+  const [boardItem, setBoardItem] = useState("");
+  const [toggle, setToggle] = useState(false);
   const [submit, setSubmit] = useState(true);
   const [logout, setLogout] = useState(false);
   const [loggedInUserObj, setLoggedInUserObj] = useState({});
-
-  useEffect(() => {
-    const loggedInUserName = _.get(props.location, "state.userName", {});
-    setLoggedInUserObj(JSON.parse(localStorage.getItem(loggedInUserName)));
-  }, [props.location]);
 
   const onLogoutYes = () => {
     setSubmit(false);
@@ -31,6 +30,11 @@ const DashBoard = (props) => {
   const onLogout = () => {
     setLogout(!logout);
   };
+
+  useEffect(() => {
+    const loggedInUserName = _.get(props.location, "state.userName", {});
+    setLoggedInUserObj(JSON.parse(localStorage.getItem(loggedInUserName)));
+  }, [props.location]);
 
   const localUname = `${_.get(loggedInUserObj, "firstName", "")} ${_.get(
     loggedInUserObj,
@@ -59,7 +63,7 @@ const DashBoard = (props) => {
         </div>
       </nav>
 
-      <div className="text-center">
+      <div className="container">
         <h4 className="mb-0 my-2 mx-3">Student Name : {localUname} </h4>
         <h4 className="mb-0 my-2 mx-3">Subject Name : Programming</h4>
       </div>

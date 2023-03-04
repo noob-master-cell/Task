@@ -74,13 +74,18 @@
   transition: 0.2s;
   width: 100px;
   position: absolute;
-  bottom: 15px;
+  bottom: 15%;
 }
 #next-button:active {
   box-shadow: none;
 }
+.btn-position {
+  display: flex;
+  justify-content: center;
+}
 .show-score {
-  position: absolute;
+  display: flex;
+  justify-content: center;
   top: 30%;
   font-size: 40px;
   text-align: center;

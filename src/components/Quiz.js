@@ -67,12 +67,14 @@ const Quiz = () => {
                 );
               })}
             </div>
-            <input
-              type="button"
-              value="Next"
-              id="next-button"
-              onClick={changeQuestion}
-            />
+            <div className="btn-position">
+              <input
+                type="button"
+                value="Next"
+                id="next-button"
+                onClick={changeQuestion}
+              />
+            </div>
           </>
         )}
       </div>
